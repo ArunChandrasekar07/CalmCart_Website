@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Bell, CheckCheck, Package, Receipt, Sparkles, TrendingDown, X } from "lucide-react";
+import { Bell, CheckCheck, Package, ReceiptIndianRupee, Sparkles, TrendingDown, X } from "lucide-react";
 import { EmptyState, PageTitle, Skeleton } from "@/components/ui/States";
 import { useAuth } from "@/context/auth";
 import { useNotifications } from "@/context/notifications";
@@ -10,7 +10,7 @@ import { dateGroup, timeAgo, type DateGroup } from "@/lib/format";
 import { cx } from "@/lib/ui";
 import type { AppNotification } from "@/lib/types";
 
-const ICONS = { price_drop: TrendingDown, restock: Package, order: Receipt, summary: Sparkles, system: Bell } as const;
+const ICONS = { price_drop: TrendingDown, restock: Package, order: ReceiptIndianRupee, summary: Sparkles, system: Bell } as const;
 const ORDER: DateGroup[] = ["Today", "Yesterday", "This Week", "Earlier"];
 
 export function AlertsView() {
