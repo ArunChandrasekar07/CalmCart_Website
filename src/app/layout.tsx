@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   description:
     "CalmCart delivers fresh fruit, vegetables, dairy, bakery and pantry staples in about 30 minutes, with a calm, clutter-free way to shop.",
   applicationName: "CalmCart",
+  icons: { icon: "/icon.svg" },
   alternates: { canonical: "/" },
   keywords: ["CalmCart", "grocery delivery", "online grocery", "30 minute delivery", "fresh fruits", "vegetables", "dairy", "bakery"],
   authors: [{ name: "Arun C." }],

@@ -58,7 +58,7 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
           toast.info(n.title);
           if (pushRef.current && typeof Notification !== "undefined" && Notification.permission === "granted") {
             try {
-              new Notification(n.title, { body: n.body ?? undefined, icon: "/icon-192.png" });
+              new Notification(n.title, { body: n.body ?? undefined, icon: "/icon.svg" });
             } catch {}
           }
         }
