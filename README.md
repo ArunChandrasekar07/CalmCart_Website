@@ -45,7 +45,7 @@ The site ships with a bundled copy of the catalog and falls back to it if Supaba
 ## Before you deploy
 
 1. In Supabase, open **Authentication → URL Configuration** and add your deployed URL (and `http://localhost:3000`) to **Redirect URLs**, so confirmation and reset-password emails return to the site.
-2. Set `NEXT_PUBLIC_SITE_URL` to your deployed origin.
+2. Set `NEXT_PUBLIC_SITE_URL` to your deployed origin (on Vercel it falls back to the production domain automatically). Link previews, canonical URLs and the sitemap use it.
 3. Deploy to Vercel (or any Node host) with `npm run build` / `npm start`.
 
 Email confirmation works either way: if it's on, sign-up shows a "check your email" screen; if it's off, you're signed in straight away.

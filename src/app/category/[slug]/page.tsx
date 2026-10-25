@@ -13,7 +13,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const c = (await getCatalog()).categories.find((x) => x.slug === decodeURIComponent(slug));
-  return c ? { title: c.name, description: `Shop ${c.name.toLowerCase()} on CalmCart, delivered in about 30 minutes.` } : {};
+  if (!c) return {};
+  const description = `Shop ${c.name.toLowerCase()} on CalmCart, delivered in about 30 minutes.`;
+  return {
+    title: c.name,
+    description,
+    alternates: { canonical: `/category/${encodeURIComponent(c.slug)}` },
+    openGraph: { type: "website", siteName: "CalmCart", url: `/category/${encodeURIComponent(c.slug)}`, title: `${c.name} · CalmCart`, description, images: [{ url: "/opengraph-image.png", width: 1200, height: 630, alt: "CalmCart" }] },
+    twitter: { card: "summary_large_image", title: `${c.name} · CalmCart`, description, images: ["/twitter-image.png"] },
+  };
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {

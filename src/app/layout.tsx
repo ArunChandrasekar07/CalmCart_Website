@@ -7,14 +7,33 @@ import { CartBar } from "@/components/layout/CartBar";
 import { getCatalog } from "@/lib/catalog";
 import "./globals.css";
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(SITE_URL),
   title: { default: "CalmCart · Groceries in about 30 minutes", template: "%s · CalmCart" },
   description:
     "CalmCart delivers fresh fruit, vegetables, dairy, bakery and pantry staples in about 30 minutes, with a calm, clutter-free way to shop.",
   applicationName: "CalmCart",
-  icons: { icon: "/icon.svg" },
-  openGraph: { title: "CalmCart", description: "Fresh groceries in about 30 minutes.", siteName: "CalmCart", type: "website" },
+  alternates: { canonical: "/" },
+  keywords: ["CalmCart", "grocery delivery", "online grocery", "30 minute delivery", "fresh fruits", "vegetables", "dairy", "bakery"],
+  authors: [{ name: "Arun C." }],
+  openGraph: {
+    type: "website",
+    siteName: "CalmCart",
+    url: "/",
+    title: "CalmCart · Groceries in about 30 minutes",
+    description: "Fresh fruit, vegetables, dairy, bakery and pantry staples at your door in about 30 minutes.",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CalmCart · Groceries in about 30 minutes",
+    description: "Fresh fruit, vegetables, dairy, bakery and pantry staples at your door in about 30 minutes.",
+  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
@@ -35,6 +54,21 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: prePaint }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              { "@context": "https://schema.org", "@type": "Organization", name: "CalmCart", url: SITE_URL, logo: `${SITE_URL}/icon-512.png` },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "CalmCart",
+                url: SITE_URL,
+                potentialAction: { "@type": "SearchAction", target: `${SITE_URL}/search?q={search_term_string}`, "query-input": "required name=search_term_string" },
+              },
+            ]),
+          }}
+        />
       </head>
       <body>
         <Providers catalog={catalog}>
